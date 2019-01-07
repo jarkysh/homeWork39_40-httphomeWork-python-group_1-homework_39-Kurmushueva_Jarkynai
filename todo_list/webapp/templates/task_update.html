@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Редактировать задачи{% endblock %}
+{% block content %}
+    <h1>Редактировать задачу</h1>
+    <form action="{% url "task_update" task.pk %}" method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Задача</label>
+            <input type="text" name="name" id="name" class="form-control">{{ task.name }}
+        </div>
+        <div class="form-group">
+            <label for="descriptions">Описание</label>
+            <textarea type="text" name="text" id="descriptions" class="form-control">{{ task.description }}</textarea>
+         <div class="input-group mb-3">
+              <label for="name">Статус </label>
+              <select class="custom-select" id="status">
+                {% for task in tasks.status.choices %}
+                <option value="{% if task.status == 'new' %}" name="Новая"></option>
+                    <option value="{% elif task.status == 'done' %}">Выполнена</option>
+                <option value="{% else %}">В процессе
+                {% endif %}
+                </option>
+                {% endfor %}
+              </select>
+           <button type="submit" class="btn btn-success">Отправить</button>
+          </div>
+        </form>
+ {% endblock %}
+
+

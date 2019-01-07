@@ -10,6 +10,7 @@ def index_view(request):
     })
 
 
+
 def create_view(request):
     if request.method == 'GET':
         return render(request, 'create.html')
@@ -18,6 +19,7 @@ def create_view(request):
             name=request.POST.get('name'),
             due_date=request.POST.get('due_date')
     )
+
     return redirect('index')
 
 
@@ -33,18 +35,20 @@ def delete_view(request, task_pk):
             task.delete()
         return redirect('index')
 
-def edit_view(request,task_pk):
+
+def update_view(request, task_pk):
     task = get_object_or_404(Task, pk=task_pk)
 
     if request.method == 'GET':
         context = {'task': task}
-        return render(request, update.html, context={
+        return render(request, 'task_update.html', context={
             'task': task
         })
-    elif request.method == 'POST'
+    elif request.method == 'POST':
         task.name = request.POST.get('name')
-        task.description = request.POST.get('text')
-        task.status = request.POST.get.('status')
-        task.created_at = request.POST.get('due_date')
+        task.description = request.POST.get('description')
+        task.status = request.POST.get('status')
+       # task.due_date = request.POST.get('due_date')
         task.save()
         return redirect('index')
+

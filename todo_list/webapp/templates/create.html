@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} Оставить запись{% endblock %}
+{% block content %}
+    <h1>Добавить новая задача</h1>
+    <form action="{% url "create" %}" METHOD="POST" >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Задача</label>
+            <input type="text" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="descriptions">Описание</label>
+            <textarea type="text" name="text" id="descriptions" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="Status">Готовность</label>
+                <input type="radio" value="new" name="new"> Новая<br>
+                <input type="radio" value="done" name="done" checked> В процессе<br>
+                <input type="radio" value="done" name="done" checked> Нет<br>
+                <input type="text" name="name" id="status" class="form-control">
+
+        </div>
+
+    <div class="input-group mb-3">
+  <select class="custom-select" id="inputGroupSelect02">
+    <option selected>Готовность</option>
+    <option value="new">Новая</option>
+    <option value="done">В процессе</option>
+    <option value="done">Выполнена</option>
+  </select>
+  <div class="input-group-append">
+    <label class="input-group-text" for="inputGroupSelect02">Options</label>
+  </div>
+</div>
+
+    </form>
+ {% endblock %}
+
